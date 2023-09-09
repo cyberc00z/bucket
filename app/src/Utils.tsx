@@ -1,11 +1,16 @@
-const fetchDetails =  async (addlink: string) => {
-    const response = await fetch(addlink);
-    const data = await response.json();
-    
-    const { name, authors, tags, date } = data; 
+import axios from "axios";
 
-    return {name, authors, tags, date}
+export const fetchDetails = async (addLink:String) => {
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/papers/', { link: addLink });
+      console.log(response);
+      const { title, authors, tags, date } = response.data;
+      console.log(title, authors, tags, date);
+      return { title, authors, tags, date };
 
+    } catch(error){
+        console.error(error);
+        //return error
+    }
 }
-
-export default fetchDetails;
+export const card = './public/icon.png';
