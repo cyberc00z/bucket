@@ -13,4 +13,4 @@ export const fetchDetails = async (addLink:String) => {
         //return error
     }
 }
-export const card = './public/icon.png';
+//export const card = './public/icon.png';

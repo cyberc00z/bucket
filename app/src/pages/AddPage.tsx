@@ -7,32 +7,39 @@ const AddPage = () => {
   const [addlink, setAddLink] = useState('');
   const [result, setResult] = useState<ResultCardProps | null>(null);
   const [inputError, setInputError] = useState(false);
+  
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    // Validate the input value
-    /*if (!isValidUrl(addlink)) {
+    // // Validate the input value
+    if (!isValidUrl(addlink)) {
       setInputError(true);
       return;
-    }*/
+    }
 
     setInputError(false);
     try {
       const response = await axios.get('http://127.0.0.1:8000/api/fetch-paper/', {
         params: {
-          link: addlink,
+          url: addlink,
         }
       });
-      console.log(response.data[0])
-      const name = response.data[0]
-      const authors = response.data[1]
-      const abstract = response.data[2]
+      console.log(typeof(response.data))
+      if (response.data.Title && response.data.Authors && response.data.Abstract && response.data.Pdf){
+      const {Title, Authors, Abstract, Pdf} = response.data;
       const tags = ['']
-      const pdfLink = response.data[3]
-
-
-      setResult({name,authors, abstract,tags,pdfLink});
+      setResult({name:Title,authors:Authors, abstract:Abstract,tags,pdfLink:Pdf, paperLink: addlink});
+      } else if (Array.isArray(response.data) && response.data.length >= 4) {
+        const name = response.data[0]
+        const authors = response.data[1]
+        const abstract = response.data[2]
+        const tags = ['']
+        const pdfLink = response.data[3]
+        setResult({name, authors, abstract, tags,pdfLink, paperLink:addlink})
+      } else {
+        console.error('Invalid response format : ', response.data);
+      }
     }
     catch(error){
       console.error(error)
@@ -41,11 +48,12 @@ const AddPage = () => {
     }
   }
 
-  /*const isValidUrl = (url: string) => {
+  const isValidUrl = (url: string) => {
     // Regular expression pattern for URL validation
     const urlPattern = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/\S*)?$/;
     return urlPattern.test(url);
-  }*/
+  }
+  
 
   return (
     <div>
@@ -69,7 +77,10 @@ const AddPage = () => {
           <label className="block">
             {inputError && <p className="mt-2 text-pink-600 text-sm">Please provide a valid URL</p>}
           </label> :
-          <ResultCard name={result.name} authors={result.authors} abstract={result.abstract} tags={result.tags}  pdfLink={result.pdfLink} />}
+          <ResultCard name={result.name} authors={result.authors} abstract={result.abstract} tags={result.tags} paperLink={addlink} pdfLink={result.pdfLink} />
+          
+          }
+          
       </>
     </div>
   )

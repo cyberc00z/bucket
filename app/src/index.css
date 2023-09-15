@@ -28,3 +28,17 @@ body {
   color: #4a5568;
   margin-left: 1rem;
 }
+
+/** result card   */
+.Result_Card {
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.Result_Card:hover {
+  background-color: rgb(252, 249, 249);
+}
+.Detail__Page{
+  color: #000000;
+  padding: 2rem;
+}

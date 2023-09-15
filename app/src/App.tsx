@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css';
-import HomePage from './pages/RoutePage';
 import { Link } from 'react-router-dom';
+import RoutePage from './pages/RoutePage';
 
 // react router
 //import { Link } from 'react-router-dom';
@@ -20,7 +20,7 @@ function App() {
       </Link>
     </header>
      <main>
-     <HomePage />
+     <RoutePage />
   
      </main>
       

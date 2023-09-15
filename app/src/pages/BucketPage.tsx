@@ -37,7 +37,7 @@ const BucketPage = () => {
           <label className="block">
             {inputError && <p className="mt-2 text-pink-600 text-sm">Can not find the paper you're looking for</p>}
           </label> :
-          <ResultCard name={result.name} authors={result.authors} tags={result.tags} abstract={result.abstract} pdfLink={result.pdfLink} />}
+          <ResultCard name={result.name} authors={result.authors} tags={result.tags} abstract={result.abstract} paperLink={result.paperLink} pdfLink={result.pdfLink} />}
       </>
         </div>
     )
