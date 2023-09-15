@@ -1,1 +1,7 @@
 ## Bucket Drive : Research Paper Aggregator
+
+TODO: 
+ADD PDF VIEW
+ADD ONLINE NOTES AND EDITOR
+ADD BOOKMARKING
+ADD GPT SUMMERIES
